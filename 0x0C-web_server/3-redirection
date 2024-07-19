@@ -1,33 +1,16 @@
 #!/usr/bin/env bash
-# Modifies the server block and configures a permanently redirect
-sudo apt update -y
-sudo apt install nginx -y
-sudo service nginx start
-sudo chown -R "$USER":"$USER" /var/www/html
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+#  A Script that configures a new Ubuntu machine to Perform a 301-redirection
 
+# Upadating Packages before Installations
+sudo apt-get update
+sudo apt-get install -y nginx
 
-sudo chown -R "$USER":"$USER" /etc/nginx/sites-enabled
-sudo bash -c 'cat <<EOF> /etc/nginx/sites-enabled/default
-	server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /var/www/html;
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-	# Add index.php to the list if you are using PHP
-	index index.html index.htm index.nginx-debian.html;
+# Performing a 301 Redirection
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/IA-LINK permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
-	server_name _;
-
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
-
-	location /redirect_me {
-		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-	}
-}
-EOF'
-sudo service nginx reload
+# Restarting Nginx service
+sudo service nginx restart
