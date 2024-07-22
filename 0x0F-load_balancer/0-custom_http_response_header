@@ -33,10 +33,10 @@ sudo sed -i '24i\	rewrite ^/redirect_me https://github.com/IA-LINK permanent;' /
 echo "Ceci n'est pas une page" >> /var/www/html/error_404.html
 sudo sed -i '25i\	error_page 404 /error_404.html;' /etc/nginx/sites-available/default
 
-# Custom HTTP response header
-sudo sed -i "s/server_name _:/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+# Creating an HTTP response header
+sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
-# Test for syntax errors
+# Testing configurations for syntax errors
 sudo nginx -t
 
 # Restarting nginx
