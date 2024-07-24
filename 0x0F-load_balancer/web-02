@@ -7,4 +7,4 @@ eval $("ssh-agent")
 ssh-add ~/.ssh/id_rsa.pub
 
 #username and ip address
-ssh ubuntu@100.25.22.62
+ssh ubuntu@107.23.104.2
