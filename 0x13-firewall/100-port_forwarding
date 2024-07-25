@@ -1,4 +1,4 @@
-.before
+# rules.before
 #
 # Rules that should be run before the ufw command line added rules. Custom
 # rules should be added to one of these chains:
@@ -7,15 +7,11 @@
 #   ufw-before-forward
 #
 
-*nat
-:PREROUTING ACCEPT [0:0]
-# The following line specifies a rule in the PREROUTING chain.
-# It checks for incoming TCP traffic on port 8080.
-# If a match is found, it redirects the traffic to port 80.
+# forwarding configuration for port 8080 to 80
+*net
+:PREROUTING ACCEPT [0:O]
 -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
-# The COMMIT statement finalizes and applies the NAT rules.
 COMMIT
-
 # Don't delete these required lines, otherwise there will be errors
 *filter
 :ufw-before-input - [0:0]
