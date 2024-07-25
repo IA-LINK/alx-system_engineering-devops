@@ -47,5 +47,5 @@ frontend IA-LINK-frontend-https
 
 backend IA-LINK-backend
         balance roundrobin
-        server 470338-web-01 54.84.155.138:80 check
-        server 470338-web-02 54.210.195.107:80 check
+        server 470338-web-01 54.236.45.50:80 check
+        server 470338-web-02 107.23.104.2:80 check
