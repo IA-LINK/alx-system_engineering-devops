@@ -2,4 +2,6 @@ Host *
     PasswordAuthentication no
     IdentityFile ~/.ssh/school
     HostName 100.25.183.96
+    PubkeyAuthentication yes
+    Port 22
     User ubuntu
