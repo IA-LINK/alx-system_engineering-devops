@@ -23,8 +23,8 @@ frontend  IA-LINK_frontend
         default_backend IA-LINK_backend
 backend IA-LINK_backend
         balance roundrobin
-        server 471746-web-01 54.236.45.50:80 check
-        server 471746-web-02 107.23.104.2:80 check
+        server 471746-web-01 100.25.166.121:80 check
+        server 471746-web-02 100.24.237.93:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
